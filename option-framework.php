@@ -254,7 +254,8 @@ if(!class_exists('Smart_Option_Framework')) {
 				'default' => '',
 				'description' => '',
 				'rows' => '10',
-				'options' => ''
+				'options' => '',
+				'multiple' => false
 			);
 
 			// parse them

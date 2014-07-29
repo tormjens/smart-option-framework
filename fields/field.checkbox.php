@@ -8,6 +8,8 @@ function sof_field_checkbox($args, $option, $option_name) {
 
 	$current = $option ? $option : $default;
 
+	$current = is_array($current) ? $current : array($current);
+
 	if($options) {
 		foreach($options as $key => $value) {
 
