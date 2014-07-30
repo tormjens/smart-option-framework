@@ -9,6 +9,7 @@ Field Types
 * Textarea
 * Checkbox
 * Select
+* Pages
 * Image (Media Library)
 
 You can add your own field types as well. See the file `fields/field.text.php` for an example of how it is done.

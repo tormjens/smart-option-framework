@@ -1,0 +1,61 @@
+<h1 id="smart-option-framework">Smart Option Framework</h1>
+<p>A simple framework for creating settings pages in WordPress. No fancy graphics added, as this I intended for use in plugins.</p>
+<h2 id="field-types">Field Types</h2>
+<ul>
+<li>Text</li>
+<li>Textarea</li>
+<li>Checkbox</li>
+<li>Select</li>
+<li>Pages</li>
+<li>Image (Media Library)</li>
+</ul>
+<p>You can add your own field types as well. See the file <code>fields/field.text.php</code> for an example of how it is done.</p>
+<h2 id="example-1-initialize">Example 1: Initialize</h2>
+<p>The following example will create a sub page under the &quot;Settings&quot;-page.</p>
+<pre><code>require_once &#39;smart-option-framework/option-framework.php&#39;;
+
+new Smart_Option_Framework( array(
+    &#39;slug&#39; =&gt; &#39;my-settings-page&#39;,
+    &#39;page_title&#39; =&gt; &#39;My Settings&#39;,
+    &#39;menu_title&#39; =&gt; &#39;My Settings&#39;,
+    &#39;capability&#39; =&gt; &#39;manage_options&#39;,
+    &#39;type&#39; =&gt; &#39;sub&#39;,
+    &#39;parent&#39; =&gt; &#39;options-general.php&#39;,
+    &#39;option_name&#39; =&gt; &#39;my_settings_options&#39;,
+    &#39;sections&#39; =&gt; array(
+        array(
+            &#39;id&#39; =&gt; &#39;my_first_section&#39;,
+            &#39;title&#39; =&gt; &#39;My First Section Name&#39;,
+            &#39;fields&#39; =&gt; array(
+                array(
+                    &#39;id&#39; =&gt; &#39;my_text_box&#39;,
+                    &#39;title&#39; =&gt; &#39;My Text Box&#39;,
+                    &#39;type&#39; =&gt; &#39;text&#39;
+                ),
+                array(
+                    &#39;id&#39; =&gt; &#39;my_text_area&#39;,
+                    &#39;title&#39; =&gt; &#39;My Text Area&#39;,
+                    &#39;type&#39; =&gt; &#39;textarea&#39;
+                ),
+                array(
+                    &#39;id&#39; =&gt; &#39;my_image&#39;,
+                    &#39;title&#39; =&gt; &#39;Image&#39;,
+                    &#39;type&#39; =&gt; &#39;image&#39;
+                ),
+                array(
+                    &#39;id&#39; =&gt; &#39;my_checkboxes&#39;,
+                    &#39;title&#39; =&gt; &#39;Checkboxes&#39;,
+                    &#39;type&#39; =&gt; &#39;checkbox&#39;,
+                    &#39;options&#39; =&gt; array(1 =&gt; &#39;First Option&#39;, 2 =&gt; &#39;Second Option&#39;, 3 =&gt; &#39;Third Option&#39;),
+                    &#39;default&#39; =&gt; array(1, 3),
+                )
+            )
+        )
+    ),
+    &#39;icon_url&#39; =&gt; &#39;&#39;,
+    &#39;position&#39; =&gt; &#39;&#39;
+) );</code></pre>
+<h2 id="example-2-get-an-option">Example 2: Get an option</h2>
+<p>The framework comes with a function that retrieves the values from the database. If you want to retrieve all the options, simply use
+<code>sof_option(&#39;my_settings_options&#39;)</code> where you would retrieve the options from our first example.</p>
+<p>If you want to retrieve a specific option, simply seperate the value by dots. For example <code>sof_option(&#39;my_settings_options.my_image&#39;)</code> would retrieve the value for the image field and <code>sof_option(&#39;my_settings_options.my_checkboxes.0&#39;)</code> would retrieve the first option in the checkboxes field.</p>
